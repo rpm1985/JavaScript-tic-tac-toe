@@ -6,4 +6,9 @@
 3. Add functionality to be display your placement (x or O)
 4. Add functionality to switch turns
 5. Add functionality to find the winner
-6. 
+
+
+# TODO js
+
+1. Add an array for the amount of tiles using 0 index based system
+2. Add whos turn it is
