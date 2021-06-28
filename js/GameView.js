@@ -1,40 +1,38 @@
-export default class GameView{
+export default class GameView {
+  update(game) {
+    this.updateTurn(game);
+    this.updateBoard(game);
+  }
 
-    constructor(){
-        console.log("init game view");
+  updateTurn(game) {
+    let playerX = document.querySelector(".player-x");
+    let playerO = document.querySelector(".player-o");
+    playerX.classList.remove("active");
+    playerO.classList.remove("active");
+
+    if (game.turn == "X") {
+      playerX.classList.add("active");
+    } else {
+      playerO.classList.add("active");
     }
+  }
 
-    updateBoard(game){
-        this.updateTurn(game);
-        const winningCombination = game.findWinningCombination();
-        
-        for(let i = 0; i < game.board.length; i++){
-            const tile = document.querySelector(`.board-tile[data-index = '${i}']`);
+  updateBoard(game) {
+    const winningCombination = game.findWinningCombination();
 
-            tile.classList.remove("tile-winner");
+    for (let i = 0; i < game.board.length; i++) {
+      const tile = document.querySelector(`.board__tile[data-index="${i}"]`);
 
-            let tileType = game.board[i] == "X" ? "tile-x" : "tile-o";
+      tile.classList.remove("board__tile--winner");
 
-            tile.innerHTML = `<span class="${tileType}">${game.board[i] ? game.board[i] : ""}</span>`
+      let classType = game.board[i] == "X" ? "tile-x" : "tile-o";
+      tile.innerHTML = `<span class="${classType}">${
+        game.board[i] ? game.board[i] : ""
+      }</span>`;
 
-            if(winningCombination && winningCombination.includes(i)){
-                tile.classList.add("tile-winner");
-            }
-
-        }
+      if (winningCombination && winningCombination.includes(i)) {
+        tile.classList.add("board__tile--winner");
+      }
     }
-
-    updateTurn(game){
-        let playerX = document.querySelector(".player-X")
-        let playerO = document.querySelector(".player-O");
-        playerX.classList.remove("active");
-        playerO.classList.remove("active");
-
-
-        if(game.turn == 'x'){
-            playerX.classList.add("active");
-        } else {
-            playerO.classList.add("active");
-        }
-    }
+  }
 }
